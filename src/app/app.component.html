@@ -1,0 +1,11 @@
+<app-header></app-header>
+
+<app-slider *ngIf="isHomeRoute()"></app-slider>
+<div class="bg0 m-t-23 p-b-140">
+  <div class="container">
+    <router-outlet></router-outlet>
+    <!-- <app-content-shop></app-content-shop> -->
+  </div>
+</div>
+
+<app-footer></app-footer>
