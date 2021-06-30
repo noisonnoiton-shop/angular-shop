@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import Category from 'src/model/category';
 
 @Injectable({
@@ -8,11 +9,11 @@ import Category from 'src/model/category';
 })
 export class CategoryService {
 
-  backEndServer: String = 'localhost';
+  backend: String = environment.backend;
 
   constructor(private http: HttpClient) { }
 
   getCategory(): Observable<Category[]> {
-    return this.http.get<Category[]>('http://' + this.backEndServer + ':8090/product/v1/categories', { });
+    return this.http.get<Category[]>(this.backend + '/v1/categories', { });
   }
 }

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import Product from 'src/model/product';
 
 @Injectable({
@@ -8,7 +9,7 @@ import Product from 'src/model/product';
 })
 export class ShopService {
 
-  backEndServer: String = 'localhost';
+  backend: String = environment.backend;
 
   products = new Subject<Observable<Product[]>>();
   productTransfer = this.products.asObservable();
@@ -16,19 +17,19 @@ export class ShopService {
   constructor(private http: HttpClient) { }
 
   getProduct(): Observable<Product[]> {
-    return this.http.get<Product[]>('http://' + this.backEndServer + ':8090/product/v1/products', { });
+    return this.http.get<Product[]>(this.backend + '/v1/products', { });
   }
 
   getProductByCategoryId(categoryId): Observable<Product[]> {
-    return this.http.get<Product[]>('http://' + this.backEndServer + ':8090/product/v1/products/category/' + categoryId, { });
+    return this.http.get<Product[]>(this.backend + '/v1/products/category/' + categoryId, { });
   }
 
   getProductAllSub() {
-    this.products.next(this.http.get<Product[]>('http://' + this.backEndServer + ':8090/product/v1/products', { }));
+    this.products.next(this.http.get<Product[]>(this.backend + '/v1/products', { }));
   }
 
   getProductByCategoryIdSub(categoryId) {
-    this.products.next(this.http.get<Product[]>('http://' + this.backEndServer + ':8090/product/v1/products/category/' + categoryId, { }));
+    this.products.next(this.http.get<Product[]>(this.backend + '/v1/products/category/' + categoryId, { }));
   }
 
 }
