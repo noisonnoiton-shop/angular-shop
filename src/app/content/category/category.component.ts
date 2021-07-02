@@ -24,7 +24,7 @@ export class CategoryComponent implements OnInit {
   constructor(
     private categoryService: CategoryService
     , private shopService: ShopService
-    , private router: Router
+    , public router: Router
     ) { }
 
   @Input() values: any = {};

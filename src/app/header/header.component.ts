@@ -13,7 +13,7 @@ export class HeaderComponent implements OnInit {
   searchHeaderClassStr: string;
   isHome: boolean;
 
-  constructor(private router: Router) { }
+  constructor(public router: Router) { }
 
   ngOnInit() {
     this.fixHeader();

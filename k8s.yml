@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: angular-shop
+  namespace: shop
+  labels:
+    app: angular-shop
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: angular-shop
+  template:
+    metadata:
+      labels:
+        app: angular-shop
+    spec:
+      containers:
+      - name: angular-shop
+        image: noisonnoiton/angular-shop:latest
+        ports:
+        - containerPort: 4200
+---        
+apiVersion: v1
+kind: Service
+metadata:
+  name: angular-shop
+  namespace: shop
+  labels:
+    app: angular-shop
+spec:
+  selector:
+    app: angular-shop
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 4200
+  type: ClusterIP
